@@ -17,17 +17,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 export function Home({ posts }) {
-    console.log("posts",posts);
-    
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState(null);
 
  
   const filteredPosts = posts.filter((post) => {
-   
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.author.username.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesTag = !selectedTag || post.tags.includes(selectedTag);
 
-    return  matchesTag;
+    return matchesSearch && matchesTag;
   });
 
   
@@ -73,7 +75,15 @@ export function Home({ posts }) {
 
      
       <div className="mb-8 space-y-4">
-       
+        <div className="relative max-w-md mx-auto">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Input
+            placeholder="Search "
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200"
+          />
+        </div>
 
        
         <div className="flex flex-wrap justify-center gap-2">
@@ -191,7 +201,7 @@ export function Home({ posts }) {
         </div>
       )}
 
-    
+     
       {posts.length > 0 && (
         <div className="text-center mt-16 py-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
           <h2 className="text-2xl font-bold text-slate-800 mb-4">

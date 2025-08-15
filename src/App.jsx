@@ -23,10 +23,10 @@ function App() {
   useEffect(() => {
     const initializeApp = () => {
       
-      const token = localStorage.getItem("blog_token");
+
       const storedUser = localStorage.getItem("blog_user");
 
-      if (token && storedUser) {
+      if ( storedUser) {
         setUser(JSON.parse(storedUser));
       }
 
@@ -108,8 +108,6 @@ function App() {
   }, []);
 
   const login = async (email, password) => {
-   
-
     const mockUsers = [
       {
         id: "1",
@@ -128,8 +126,7 @@ function App() {
     const foundUser = mockUsers.find(
       (u) => u.email === email && u.password === password
     );
-    console.log("kl",foundUser);
-    
+    console.log("kl", foundUser);
 
     if (foundUser) {
       const user = {
@@ -137,9 +134,7 @@ function App() {
         username: foundUser.username,
         email: foundUser.email,
       };
-      const token = "mock_jwt_token_" + Date.now();
 
-      localStorage.setItem("blog_token", token);
       localStorage.setItem("blog_user", JSON.stringify(user));
       setUser(user);
       return true;
@@ -148,24 +143,18 @@ function App() {
     return false;
   };
   const register = async (username, email, password) => {
-   
-
     const newUser = {
       id: Date.now().toString(),
       username,
       email,
     };
 
-    const token = "mock_jwt_token_" + Date.now();
-
-    localStorage.setItem("blog_token", token);
     localStorage.setItem("blog_user", JSON.stringify(newUser));
     setUser(newUser);
     return true;
   };
 
   const logout = () => {
-    localStorage.removeItem("blog_token");
     localStorage.removeItem("blog_user");
     setUser(null);
   };
