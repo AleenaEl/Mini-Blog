@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BookOpen, Lock, Mail, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { BookOpen, Loader2, Lock, Mail, User } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-//   const { register } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const validateForm = () => {

@@ -62,7 +62,7 @@ export function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-16">
+    <div className="max-w-md mx-auto ">
       <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
         <CardHeader className="text-center pb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -142,12 +142,11 @@ export function Login() {
             </p>
           </div>
 
-          {/* Demo Credentials */}
           <Alert className="mt-6 bg-blue-50 border-blue-200">
             <AlertDescription className="text-sm text-blue-800">
               <strong>Demo Credentials:</strong>
               <br />
-              Email: john@example.com or jane@example.com
+              Email: eldhose@example.com or aleena@example.com
               <br />
               Password: password123
             </AlertDescription>

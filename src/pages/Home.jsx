@@ -17,22 +17,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 export function Home({ posts }) {
-  const [searchTerm, setSearchTerm] = useState("");
+    console.log("posts",posts);
+    
   const [selectedTag, setSelectedTag] = useState(null);
 
-  // Filter posts based on search term and selected tag
+ 
   const filteredPosts = posts.filter((post) => {
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.author.username.toLowerCase().includes(searchTerm.toLowerCase());
+   
 
     const matchesTag = !selectedTag || post.tags.includes(selectedTag);
 
-    return matchesSearch && matchesTag;
+    return  matchesTag;
   });
 
-  // Get all unique tags from posts
+  
   const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)));
 
   const formatDate = (dateString) => {
@@ -61,30 +59,23 @@ export function Home({ posts }) {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+     
+          <div className="text-center mb-12">
+              
+        <h1 className="text-4xl md:text-5xl  font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
           Welcome to BlogPlatform
         </h1>
-        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+        <p className="text-xs md:text-base text-slate-600 max-w-2xl mx-auto">
           Discover amazing stories, insightful articles, and expert opinions
           from our community of writers.
         </p>
       </div>
 
-      {/* Search and Filter Section */}
+     
       <div className="mb-8 space-y-4">
-        <div className="relative max-w-md mx-auto">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <Input
-            placeholder="Search posts, authors..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-white/80 backdrop-blur-sm border-slate-200"
-          />
-        </div>
+       
 
-        {/* Tag Filter */}
+       
         <div className="flex flex-wrap justify-center gap-2">
           <Button
             variant={selectedTag === null ? "default" : "outline"}
@@ -112,7 +103,7 @@ export function Home({ posts }) {
         </div>
       </div>
 
-      {/* Posts Grid */}
+   
       {filteredPosts.length === 0 ? (
         <div className="text-center py-12">
           <div className="w-24 h-24 bg-gradient-to-br from-slate-200 to-slate-300 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -144,11 +135,11 @@ export function Home({ posts }) {
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-slate-800 truncate">
+                    <p className="text-sm font-semibold text-slate-800 truncate">
                       {post.author.username}
                     </p>
-                    <div className="flex items-center gap-1 text-xs text-slate-500">
-                      <CalendarDays className="h-3 w-3" />
+                    <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                      <CalendarDays className="h-2 w-2" />
                       <span>{formatDate(post.createdAt)}</span>
                     </div>
                   </div>
@@ -200,7 +191,7 @@ export function Home({ posts }) {
         </div>
       )}
 
-      {/* Call to Action */}
+    
       {posts.length > 0 && (
         <div className="text-center mt-16 py-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
           <h2 className="text-2xl font-bold text-slate-800 mb-4">

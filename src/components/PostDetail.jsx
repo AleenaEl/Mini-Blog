@@ -47,66 +47,13 @@ export function PostDetail({ posts }) {
     return username.charAt(0).toUpperCase();
   };
 
-  const formatContent = (content) => {
-    return content
-      .split("\n")
-      .map((paragraph, index) => {
-        if (paragraph.trim() === "") return null;
 
-        // Handle headings
-        if (paragraph.startsWith("# ")) {
-          return (
-            <h1
-              key={index}
-              className="text-3xl font-bold text-slate-800 mt-8 mb-4"
-            >
-              {paragraph.substring(2)}
-            </h1>
-          );
-        }
-        if (paragraph.startsWith("## ")) {
-          return (
-            <h2
-              key={index}
-              className="text-2xl font-bold text-slate-800 mt-6 mb-3"
-            >
-              {paragraph.substring(3)}
-            </h2>
-          );
-        }
-        if (paragraph.startsWith("### ")) {
-          return (
-            <h3
-              key={index}
-              className="text-xl font-bold text-slate-800 mt-4 mb-2"
-            >
-              {paragraph.substring(4)}
-            </h3>
-          );
-        }
-
-        // Handle bold text
-        const boldText = paragraph.replace(
-          /\*\*(.*?)\*\*/g,
-          "<strong>$1</strong>"
-        );
-
-        return (
-          <p
-            key={index}
-            className="text-slate-700 leading-relaxed mb-4"
-            dangerouslySetInnerHTML={{ __html: boldText }}
-          />
-        );
-      })
-      .filter(Boolean);
-  };
 
   const readingTime = Math.ceil(post.content.split(" ").length / 200);
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Back Button */}
+     
       <div className="mb-6">
         <Button
           variant="ghost"
@@ -118,11 +65,11 @@ export function PostDetail({ posts }) {
         </Button>
       </div>
 
-      {/* Article Header */}
+ 
       <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-8">
         <CardContent className="p-8">
           <div className="space-y-6">
-            {/* Author Info */}
+           
             <div className="flex items-center gap-4">
               <Avatar className="h-12 w-12 bg-gradient-to-br from-blue-500 to-purple-500">
                 <AvatarFallback className="text-white font-semibold bg-">
@@ -157,13 +104,13 @@ export function PostDetail({ posts }) {
               </Link>
             </div>
 
-            {/* Title */}
+           
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-slate-800 leading-tight mb-4">
                 {post.title}
               </h1>
 
-              {/* Tags */}
+              
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <Badge
@@ -180,16 +127,15 @@ export function PostDetail({ posts }) {
         </CardContent>
       </Card>
 
-      {/* Article Content */}
+     
       <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm mb-8">
         <CardContent className="p-8">
           <article className="prose prose-slate max-w-none">
-            {formatContent(post.content)}
+            {post.content}
           </article>
         </CardContent>
       </Card>
 
-      {/* Article Footer */}
       <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50">
         <CardContent className="p-8 text-center">
           <div className="space-y-4">

@@ -23,7 +23,7 @@ export function Dashboard({ posts, setPosts }) {
   const { user } = useAuth();
   const [deletePostId, setDeletePostId] = useState(null);
 
-  // Filter posts by current user
+  
   const userPosts = posts.filter((post) => post.author.id === user?.id);
 
   const handleDeletePost = (postId) => {
@@ -44,7 +44,7 @@ export function Dashboard({ posts, setPosts }) {
 
   const getPostStats = () => {
     const totalPosts = userPosts.length;
-    const totalViews = userPosts.length * Math.floor(Math.random() * 100 + 50); // Mock views
+    const totalViews = userPosts.length * Math.floor(Math.random() * 100 + 50); 
     const totalTags = new Set(userPosts.flatMap((post) => post.tags)).size;
 
     return { totalPosts, totalViews, totalTags };
@@ -54,7 +54,7 @@ export function Dashboard({ posts, setPosts }) {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Welcome Section */}
+    
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800 mb-2">
           Welcome back, {user?.username}!
@@ -64,7 +64,7 @@ export function Dashboard({ posts, setPosts }) {
         </p>
       </div>
 
-      {/* Stats Cards */}
+   
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 border-0 shadow-md">
           <CardContent className="p-6">
@@ -119,7 +119,7 @@ export function Dashboard({ posts, setPosts }) {
         </Card>
       </div>
 
-      {/* Posts Section */}
+      
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-slate-800">Your Posts</h2>
         <Link to="/create">

@@ -22,13 +22,7 @@ export function CreatePost({ posts, setPosts }) {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const generateExcerpt = (content) => {
-    const plainText = content.replace(/[#*`]/g, "").trim();
-    const sentences = plainText.split(".").filter((s) => s.trim().length > 0);
-    const excerpt =
-      sentences.slice(0, 2).join(".") + (sentences.length > 2 ? "." : "");
-    return excerpt.length > 150 ? excerpt.substring(0, 150) + "..." : excerpt;
-  };
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -80,7 +74,6 @@ export function CreatePost({ posts, setPosts }) {
         id: Date.now().toString(),
         title: title.trim(),
         content: content.trim(),
-        excerpt: generateExcerpt(content),
         author: user,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -115,7 +108,7 @@ export function CreatePost({ posts, setPosts }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Editor */}
+     
         <div className="lg:col-span-2">
           <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
             <CardHeader>
@@ -143,7 +136,7 @@ export function CreatePost({ posts, setPosts }) {
                   <Label htmlFor="content">Content</Label>
                   <Textarea
                     id="content"
-                    placeholder="Write your blog post content here... You can use Markdown formatting!"
+                    placeholder="Write your blog post content here... "
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     className={`min-h-96 resize-none ${
@@ -180,9 +173,8 @@ export function CreatePost({ posts, setPosts }) {
           </Card>
         </div>
 
-        {/* Sidebar */}
         <div className="space-y-6">
-          {/* Tags Section */}
+          
           <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-lg">Tags</CardTitle>
@@ -233,7 +225,7 @@ export function CreatePost({ posts, setPosts }) {
             </CardContent>
           </Card>
 
-          {/* Preview Section */}
+         
           {(title || content) && (
             <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader>
@@ -247,7 +239,7 @@ export function CreatePost({ posts, setPosts }) {
                 )}
                 {content && (
                   <p className="text-sm text-slate-600 line-clamp-3">
-                    {generateExcerpt(content)}
+                    {content}
                   </p>
                 )}
                 {tags.length > 0 && (
@@ -268,7 +260,7 @@ export function CreatePost({ posts, setPosts }) {
             </Card>
           )}
 
-          {/* Tips Section */}
+       
           <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-emerald-50">
             <CardHeader>
               <CardTitle className="text-lg text-green-800">
