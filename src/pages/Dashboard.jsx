@@ -249,7 +249,7 @@ export function Dashboard({ posts, setPosts }) {
         </div>
       )}
 
-      {/* Delete Confirmation Dialog */}
+      
       <AlertDialog
         open={!!deletePostId}
         onOpenChange={() => setDeletePostId(null)}
